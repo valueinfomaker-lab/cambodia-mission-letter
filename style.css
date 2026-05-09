@@ -376,6 +376,29 @@ ul, ol {
   margin: var(--s-4) auto 0;
 }
 
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 auto var(--s-6);
+  max-width: 480px;
+  font-style: normal;
+  letter-spacing: -0.005em;
+}
+
+.hero-tagline::before,
+.hero-tagline::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+}
+
+@media (min-width: 600px) {
+  .hero-tagline { font-size: 1.15rem; }
+}
+
 .hero-sub {
   font-family: var(--font-serif);
   font-size: 1rem;
