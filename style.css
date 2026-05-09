@@ -1011,9 +1011,6 @@ ul, ol {
   color: var(--text);
 }
 
-.prayer-card--highlight {
-  background: var(--bg-deep);
-}
 
 .church-chips {
   display: flex;
