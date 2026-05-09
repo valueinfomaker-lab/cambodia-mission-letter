@@ -690,6 +690,14 @@ ul, ol {
   .gallery-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
+.gallery-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 600px) {
+  .gallery-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
 .gallery-square {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -792,51 +800,6 @@ ul, ol {
   background: var(--bg);
 }
 
-.kg-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-4);
-  margin: var(--s-7) 0;
-}
-
-@media (min-width: 600px) {
-  .kg-cards { grid-template-columns: repeat(3, 1fr); }
-}
-
-.kg-card {
-  text-align: center;
-  padding: var(--s-6) var(--s-4);
-  background: var(--bg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border-top: 3px solid var(--accent-red);
-}
-
-.kg-num {
-  font-family: var(--font-roman);
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--accent-red);
-  margin: 0 0 var(--s-2) 0;
-  letter-spacing: -0.02em;
-}
-
-.kg-label {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0 0 var(--s-2) 0;
-}
-
-.kg-desc {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-
 .closing-line {
   text-align: center;
   font-size: 1.05rem;
@@ -889,46 +852,6 @@ ul, ol {
   font-size: 0.95rem;
   color: var(--text-muted);
   margin: 0;
-}
-
-.prayer-1-photo {
-  margin: 0 0 var(--s-7) 0;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  background: var(--bg-deep);
-}
-
-.prayer-1-photo img {
-  width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: cover;
-  object-position: center 30%;
-  cursor: zoom-in;
-  display: block;
-  transition: transform 300ms ease;
-}
-
-.prayer-1-photo img:hover {
-  transform: scale(1.01);
-}
-
-.prayer-1-photo figcaption {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-  padding: var(--s-2) var(--s-3);
-  background: var(--bg);
-}
-
-@media (min-width: 960px) {
-  .prayer-1-photo {
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 .prayer-list {
@@ -1584,7 +1507,6 @@ ul, ol {
   .prayer-item,
   .big-card,
   .mini-card,
-  .kg-card,
   .quote-bubble,
   .hymn,
   .timeline li {

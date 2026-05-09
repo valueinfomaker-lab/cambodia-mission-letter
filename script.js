@@ -219,7 +219,7 @@ function initReveal() {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) return;
 
-  const targets = $$(".section, .gallery figure, .prayer-item, .big-card, .kg-card, .mini-card, .timeline li");
+  const targets = $$(".section, .gallery figure, .prayer-item, .big-card, .mini-card, .timeline li");
   targets.forEach(el => el.classList.add("reveal"));
 
   if (!("IntersectionObserver" in window)) {
