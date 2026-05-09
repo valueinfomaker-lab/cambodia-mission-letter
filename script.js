@@ -4,9 +4,9 @@
 
 /* ---------- CONFIG (사용자가 배포 전 채울 값) ---------- */
 const CONFIG = {
-  // 배포 절대 URL (예: "https://nam-lim-cambodia.netlify.app")
+  // 배포 절대 URL — 카카오/SNS 공유 시 OG 메타가 이 도메인을 가리킴
   // 비워두면 location.origin을 자동 사용 (로컬 테스트 시 그대로 동작)
-  SITE_URL: "",
+  SITE_URL: "https://valueinfomaker-lab.github.io/cambodia-mission-letter/",
 
   // OG 공유 썸네일 (기본: 표지 이미지)
   OG_IMAGE_PATH: "extracted_images/slide_001/img_01.jpeg",
