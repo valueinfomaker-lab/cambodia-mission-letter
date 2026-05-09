@@ -660,24 +660,6 @@ ul, ol {
   transform: scale(1.04);
 }
 
-/* asymmetric: 1 wide + 5 small */
-.gallery-asymmetric {
-  grid-template-columns: 1fr 1fr;
-}
-
-.gallery-asymmetric .g-wide {
-  grid-column: 1 / -1;
-  aspect-ratio: 16 / 9;
-}
-
-@media (min-width: 600px) {
-  .gallery-asymmetric { grid-template-columns: repeat(3, 1fr); }
-  .gallery-asymmetric .g-wide {
-    grid-column: 1 / -1;
-    aspect-ratio: 21 / 9;
-  }
-}
-
 @media (min-width: 960px) {
   .gallery { gap: var(--s-4); }
 }
