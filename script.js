@@ -13,17 +13,17 @@ const CONFIG = {
 
   // 후원 계좌 정보 (한 줄로 합쳐서 복사됨)
   BANK_ACCOUNT: {
-    bank: "[은행명]",
-    number: "[계좌번호]",
-    holder: "[예금주]"
+    bank: "기업은행",
+    number: "481-005088-01-015",
+    holder: "남기선"
   },
 
   // 연락처 (값이 없으면 해당 줄은 자동 숨김)
   CONTACT: {
-    email: "",       // 예: "missionary@example.com"
-    kakaoId: "",     // 예: "namgisun" (카카오 ID)
-    phoneKr: "",     // 한국 연락처 (선택)
-    phoneKh: ""      // 캄보디아 연락처 (선택)
+    email:   "namgisuns@naver.com",
+    kakaoId: "",
+    phoneKr: "010-8905-6408",
+    phoneKh: "088-718-4720"
   },
 
   // 발행일 (예: "2026년 5월 9일")
@@ -54,8 +54,10 @@ function hydrateConfig() {
   $$('[data-bind="holder"]').forEach(el => el.textContent = CONFIG.BANK_ACCOUNT.holder);
 
   // Contact
-  hydrateContact("email", CONFIG.CONTACT.email);
+  hydrateContact("email",   CONFIG.CONTACT.email);
   hydrateContact("kakaoId", CONFIG.CONTACT.kakaoId);
+  hydrateContact("phoneKr", CONFIG.CONTACT.phoneKr);
+  hydrateContact("phoneKh", CONFIG.CONTACT.phoneKh);
 
   // Published date
   $$('[data-bind="publishedAt"]').forEach(el => el.textContent = CONFIG.PUBLISHED_AT);
@@ -69,8 +71,9 @@ function hydrateConfig() {
 function hydrateContact(key, value) {
   const el = document.querySelector(`[data-bind="${key}"]`);
   if (!el) return;
+  const line = el.closest(".contact-line") || el;
   if (!value) {
-    el.parentElement && (el.parentElement.style.display = "none");
+    line.style.display = "none";
     return;
   }
   const prefix = el.getAttribute("data-bind-prefix") || "";

@@ -1332,6 +1332,11 @@ ul, ol {
   margin: 0;
 }
 
+.footer-contact .contact-line {
+  display: block;
+  line-height: 1.7;
+}
+
 .footer-share-note {
   font-family: var(--font-serif);
   font-size: 0.8rem;
