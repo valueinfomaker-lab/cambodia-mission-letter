@@ -1,0 +1,1621 @@
+/* ============================================================
+   Mission in Cambodia — Landing Page Stylesheet
+   "편지 같은 따뜻함" — 베이지 편지지 톤, 명조 본문
+   ============================================================ */
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Colors */
+  --bg:           #FDFBF5;
+  --bg-card:      #F8F1E0;
+  --bg-deep:      #F0E6CE;
+  --text:         #2B2520;
+  --text-muted:   #6B5E52;
+  --text-light:   #FDFBF5;
+  --accent-red:   #B22234;
+  --accent-red-soft: #C94A56;
+  --accent-blue:  #0E4E96;
+  --success:      #2F855A;
+  --shadow-sm:    0 1px 2px rgba(43, 37, 32, 0.06), 0 4px 12px rgba(43, 37, 32, 0.04);
+  --shadow-md:    0 2px 4px rgba(43, 37, 32, 0.08), 0 8px 24px rgba(43, 37, 32, 0.08);
+  --shadow-lg:    0 8px 32px rgba(43, 37, 32, 0.18);
+
+  /* Typography */
+  --font-serif:   "Noto Serif KR", "Apple SD Gothic Neo", "Nanum Myeongjo", serif;
+  --font-roman:   "Cormorant Garamond", "Noto Serif KR", serif;
+  --font-sans:    "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Helvetica Neue", sans-serif;
+  --font-khmer:   "Noto Sans Khmer", "Noto Serif KR", serif;
+
+  /* Spacing (8px grid) */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+
+  /* Layout */
+  --reading-width: 720px;
+  --gallery-width: 1080px;
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-blue);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Layout primitives ---------- */
+.container {
+  width: 100%;
+  max-width: var(--gallery-width);
+  margin: 0 auto;
+  padding: 0 var(--s-5);
+}
+
+.prose-narrow {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--s-8) 0;
+}
+
+@media (min-width: 960px) {
+  .section {
+    padding: var(--s-9) 0;
+  }
+  .container {
+    padding: 0 var(--s-7);
+  }
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--s-5) 0;
+  color: var(--text);
+}
+
+@media (min-width: 600px) {
+  .section-title { font-size: 2rem; }
+}
+
+@media (min-width: 960px) {
+  .section-title { font-size: 2.25rem; }
+}
+
+.section-title--center {
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin: 0 0 var(--s-3) 0;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.eyebrow--light {
+  color: var(--accent-red-soft);
+}
+
+.prose p {
+  margin: 0 0 1em 0;
+}
+
+.prose p + p {
+  margin-top: 1em;
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.two-col {
+  display: grid;
+  gap: var(--s-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 960px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    align-items: start;
+  }
+  .two-col--photo-first .greeting-photo { order: 0; }
+  .two-col--photo-first .prose { order: 1; }
+  .two-col--photo-side .photo-frame { order: 2; }
+  .two-col--photo-side .prose { order: 1; }
+}
+
+/* ---------- S0. Sticky Header ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 56px;
+  background: rgba(250, 246, 238, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(178, 34, 52, 0.15);
+  transform: translateY(0);
+  transition: transform 280ms ease;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand-mark {
+  color: var(--accent-red);
+  font-size: 0.8em;
+}
+
+.header-share {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-radius: 999px;
+  background: var(--bg-card);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.header-share:hover {
+  background: var(--bg-deep);
+}
+
+.header-share:active {
+  transform: scale(0.97);
+}
+
+/* ---------- S1. Hero ---------- */
+.hero {
+  position: relative;
+  margin-top: 56px;
+  padding: var(--s-9) var(--s-5) var(--s-8);
+  background: var(--bg);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Cambodian flag accent — thin tri-color band at top (blue · red · blue) */
+.hero-flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    180deg,
+    var(--accent-blue) 0%,
+    var(--accent-blue) 33.33%,
+    var(--accent-red)  33.33%,
+    var(--accent-red)  66.67%,
+    var(--accent-blue) 66.67%,
+    var(--accent-blue) 100%
+  );
+}
+
+.hero-meta {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero-khmer {
+  font-family: var(--font-khmer);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  margin: 0 0 var(--s-5) 0;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.letter-prefix {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 var(--s-5) 0;
+}
+
+.hero-title {
+  font-family: var(--font-roman);
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--s-5) 0;
+  color: var(--text);
+}
+
+@media (min-width: 600px) {
+  .hero-title { font-size: 4rem; }
+}
+
+@media (min-width: 960px) {
+  .hero-title { font-size: 5rem; }
+}
+
+.hero-divider {
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: 0 auto var(--s-5);
+  background: var(--accent-red);
+  opacity: 0.6;
+}
+
+.hero-divider--center {
+  margin: var(--s-4) auto 0;
+}
+
+.hero-sub {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 var(--s-7) 0;
+}
+
+.hero-sub-date {
+  display: inline-block;
+  margin-top: var(--s-1);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 600px) {
+  .hero-sub { font-size: 1.05rem; }
+}
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-5);
+  border: 1.5px solid var(--accent-red);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-red);
+  transition: all 0.2s ease;
+}
+
+.scroll-cue:hover {
+  background: var(--accent-red);
+  color: var(--text-light);
+}
+
+.scroll-cue svg {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* ---------- S2. 인사말 ---------- */
+.greeting {
+  background: var(--bg);
+}
+
+.photo-frame {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: auto;
+  cursor: zoom-in;
+  transition: transform 300ms ease;
+}
+
+.photo-frame img:hover {
+  transform: scale(1.01);
+}
+
+.photo-frame figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--s-2) var(--s-3);
+  background: var(--bg);
+}
+
+.khmer-greeting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent-red);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 0 0 var(--s-5) 0;
+}
+
+.khmer-greeting .khmer {
+  font-family: var(--font-khmer);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  line-height: 1;
+}
+
+.khmer-greeting span:not(.khmer) {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.hymn {
+  margin: var(--s-6) 0;
+  padding: var(--s-5) var(--s-6);
+  background: var(--bg-card);
+  border-left: 5px solid var(--accent-red);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.hymn p {
+  margin: 0 0 0.6em 0;
+}
+
+.hymn p:last-child {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.emphatic {
+  text-align: center;
+  font-size: 1.15rem;
+  margin-top: var(--s-6) !important;
+  letter-spacing: -0.01em;
+}
+
+.emphatic strong {
+  color: var(--accent-red);
+  font-weight: 700;
+}
+
+/* ---------- S3. 한 해의 캄보디아 ---------- */
+.news {
+  background: var(--bg);
+}
+
+.quote-bubble {
+  position: relative;
+  margin: var(--s-7) 0;
+  padding: var(--s-6) var(--s-7);
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--text);
+}
+
+.quote-bubble::before {
+  content: "“";
+  position: absolute;
+  top: -0.3em;
+  left: var(--s-4);
+  font-family: var(--font-roman);
+  font-size: 4rem;
+  color: var(--accent-red);
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.quote-bubble strong {
+  color: var(--accent-red);
+}
+
+.mini-card {
+  margin: var(--s-7) 0 0 0;
+  padding: var(--s-5) var(--s-6);
+  background: var(--bg);
+  border: 1px solid var(--bg-deep);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.mini-card-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin: 0 0 var(--s-2) 0;
+}
+
+.mini-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-2) 0;
+}
+
+.mini-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.65;
+}
+
+.gallery-container {
+  margin-top: var(--s-7);
+}
+
+.gallery-label {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--s-4) 0;
+  padding-left: var(--s-3);
+  border-left: 3px solid var(--accent-red);
+}
+
+.gallery-label + .gallery {
+  margin-bottom: var(--s-7);
+}
+
+.gallery {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.gallery figure {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-deep);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 1 / 1;
+  cursor: zoom-in;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.gallery figure:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.gallery figure:hover img {
+  transform: scale(1.04);
+}
+
+/* asymmetric: 1 wide + 5 small */
+.gallery-asymmetric {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gallery-asymmetric .g-wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 600px) {
+  .gallery-asymmetric { grid-template-columns: repeat(3, 1fr); }
+  .gallery-asymmetric .g-wide {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 9;
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery { gap: var(--s-4); }
+}
+
+.gallery-3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 600px) {
+  .gallery-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.gallery-square {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 600px) {
+  .gallery-square { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- S4. 교회학교 ---------- */
+.schools {
+  background: var(--bg);
+}
+
+.big-quote {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: center;
+  margin: var(--s-7) 0;
+  padding: var(--s-5) var(--s-4);
+  color: var(--text);
+}
+
+.big-quote strong {
+  font-size: 1.6em;
+  color: var(--accent-red);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 600px) {
+  .big-quote { font-size: 1.55rem; }
+}
+
+.timeline {
+  margin: var(--s-7) 0;
+  padding: 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 28px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-red) 0%, var(--accent-red-soft) 100%);
+  border-radius: 1px;
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  align-items: start;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-red);
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.t-year {
+  font-family: var(--font-roman);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  text-align: right;
+  padding-right: var(--s-3);
+}
+
+.t-body h4 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-1) 0;
+}
+
+.t-body p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ---------- S5. 임마누엘 유치원 ---------- */
+.kindergarten {
+  background: var(--bg);
+}
+
+.kg-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+  margin: var(--s-7) 0;
+}
+
+@media (min-width: 600px) {
+  .kg-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.kg-card {
+  text-align: center;
+  padding: var(--s-6) var(--s-4);
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--accent-red);
+}
+
+.kg-num {
+  font-family: var(--font-roman);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-red);
+  margin: 0 0 var(--s-2) 0;
+  letter-spacing: -0.02em;
+}
+
+.kg-label {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-2) 0;
+}
+
+.kg-desc {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.closing-line {
+  text-align: center;
+  font-size: 1.05rem;
+  margin: var(--s-6) 0 0 0;
+  color: var(--text);
+}
+
+.closing-line strong {
+  color: var(--accent-red);
+}
+
+.closing-line--center {
+  text-align: center;
+  margin-top: var(--s-7);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ---------- S6. 기도제목 I ---------- */
+.prayer-1 {
+  background: var(--bg);
+}
+
+.prayer-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--s-7);
+}
+
+.prayer-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 var(--s-3) 0;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 600px) {
+  .prayer-title { font-size: 2.25rem; }
+}
+
+@media (min-width: 960px) {
+  .prayer-title { font-size: 2.5rem; }
+}
+
+.prayer-sub {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.prayer-1-photo {
+  margin: 0 0 var(--s-7) 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-deep);
+}
+
+.prayer-1-photo img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center 30%;
+  cursor: zoom-in;
+  display: block;
+  transition: transform 300ms ease;
+}
+
+.prayer-1-photo img:hover {
+  transform: scale(1.01);
+}
+
+.prayer-1-photo figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--s-2) var(--s-3);
+  background: var(--bg);
+}
+
+@media (min-width: 960px) {
+  .prayer-1-photo {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.prayer-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+}
+
+@media (min-width: 600px) {
+  .prayer-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .prayer-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.prayer-card {
+  position: relative;
+  padding: var(--s-5) var(--s-5) var(--s-5) var(--s-7);
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.prayer-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-red);
+  border-radius: 4px 0 0 4px;
+}
+
+.prayer-card .check {
+  position: absolute;
+  top: var(--s-5);
+  left: var(--s-4);
+  width: 18px;
+  height: 18px;
+  background: var(--bg);
+  border: 2px solid var(--accent-red);
+  border-radius: 4px;
+}
+
+.prayer-card .check::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: -2px;
+  width: 6px;
+  height: 12px;
+  border-right: 2.5px solid var(--accent-red);
+  border-bottom: 2.5px solid var(--accent-red);
+  transform: rotate(45deg);
+}
+
+.prayer-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-2) 0;
+  color: var(--text);
+  padding-left: var(--s-5);
+}
+
+.prayer-card p,
+.prayer-card .church-chips {
+  margin: 0;
+}
+
+.prayer-card p {
+  color: var(--text-muted);
+}
+
+.prayer-card strong {
+  color: var(--text);
+}
+
+.prayer-card--highlight {
+  background: var(--bg-deep);
+}
+
+.church-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-2) !important;
+}
+
+.church-chips li {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px var(--s-3);
+  background: var(--bg-card);
+  color: var(--text);
+  border-radius: 999px;
+  border: 1px solid var(--bg-deep);
+}
+
+/* ---------- S7. 기도제목 II ---------- */
+.prayer-2 {
+  background: var(--bg);
+}
+
+.prayer-2 .photo-frame img {
+  cursor: zoom-in;
+}
+
+@media (min-width: 960px) {
+  .prayer-2 .photo-frame {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+  }
+}
+
+.big-card {
+  position: relative;
+  margin: var(--s-5) 0;
+  padding: var(--s-6) var(--s-5) var(--s-6) var(--s-7);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.big-card-num {
+  position: absolute;
+  top: var(--s-5);
+  left: var(--s-4);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-roman);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-light);
+  background: var(--accent-red);
+  border-radius: 50%;
+  margin: 0;
+}
+
+.big-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-3) 0;
+  color: var(--text);
+}
+
+.big-card p {
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 0.8em 0;
+}
+
+.big-card p:last-child {
+  margin-bottom: 0;
+}
+
+.big-card-call {
+  margin-top: var(--s-3) !important;
+  padding-top: var(--s-3);
+  border-top: 1px dashed var(--bg-deep);
+  color: var(--text) !important;
+  font-weight: 500;
+}
+
+.big-card-call strong {
+  color: var(--accent-red);
+}
+
+/* ---------- S8. CTA ---------- */
+.cta {
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.cta .container {
+  max-width: 560px;
+}
+
+.cta-lead {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--s-7) 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-5) var(--s-6);
+  background: var(--accent-red);
+  color: var(--text-light);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.1s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.share-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.share-btn:active {
+  transform: scale(0.98);
+}
+
+.share-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.link-btn {
+  display: inline-block;
+  margin-top: var(--s-4);
+  padding: var(--s-3) var(--s-5);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  border-bottom: 1px dashed var(--accent-blue);
+  transition: opacity 0.2s ease;
+}
+
+.link-btn:hover {
+  opacity: 0.7;
+}
+
+.support-details {
+  margin-top: var(--s-7);
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--bg-deep);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.support-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-4) var(--s-5);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+}
+
+.support-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.support-details summary .chev {
+  transition: transform 250ms ease;
+  color: var(--text-muted);
+}
+
+.support-details[open] summary .chev {
+  transform: rotate(180deg);
+}
+
+.support-body {
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  border-top: 1px solid var(--bg-deep);
+  background: var(--bg-card);
+}
+
+.account-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-3);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  margin: 0 0 var(--s-3) 0;
+}
+
+.account-line .account-number {
+  font-family: var(--font-roman);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--accent-red);
+  letter-spacing: 0.02em;
+}
+
+.account-line .account-holder {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--s-2) var(--s-4);
+  background: var(--accent-red);
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.copy-btn:hover {
+  filter: brightness(0.95);
+}
+
+.copy-btn:active {
+  transform: scale(0.97);
+}
+
+.copy-btn.is-copied {
+  background: var(--success);
+}
+
+.support-note {
+  margin: var(--s-3) 0 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.print-hint {
+  margin: var(--s-7) 0 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- S9. Footer ---------- */
+.site-footer {
+  position: relative;
+  padding: var(--s-8) 0 var(--s-7);
+  background: var(--bg-deep);
+  color: var(--text);
+  border-top: 1px solid rgba(178, 34, 52, 0.12);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+  margin-bottom: var(--s-7);
+}
+
+@media (min-width: 600px) {
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.footer-block {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.footer-senders {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-1) 0;
+}
+
+.footer-place {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.footer-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin: 0 0 var(--s-2) 0;
+}
+
+.footer-contact,
+.footer-date {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.footer-share-note {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: var(--s-2) 0 0 0;
+  line-height: 1.5;
+}
+
+.footer-bottom {
+  padding-top: var(--s-5);
+  border-top: 1px solid rgba(43, 37, 32, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  text-align: center;
+}
+
+.footer-url {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  word-break: break-all;
+  opacity: 0.8;
+}
+
+.copyright {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Back to top */
+.back-to-top {
+  position: fixed;
+  bottom: var(--s-5);
+  right: var(--s-5);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 250ms ease, transform 250ms ease, background 0.2s ease;
+  z-index: 90;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--accent-red);
+  color: var(--text-light);
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: var(--s-7);
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 200;
+  padding: var(--s-3) var(--s-5);
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 999px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: rgba(20, 14, 10, 0.92);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox[open] {
+  display: flex;
+}
+
+.lightbox::backdrop {
+  background: rgba(20, 14, 10, 0.92);
+}
+
+.lightbox-figure {
+  margin: 0;
+  max-width: 92vw;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.lightbox-figure img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+}
+
+.lightbox-figure figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: rgba(250, 246, 238, 0.85);
+  text-align: center;
+  max-width: 600px;
+  padding: 0 var(--s-4);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(250, 246, 238, 0.1);
+  color: var(--bg);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(250, 246, 238, 0.2);
+}
+
+.lightbox-close {
+  top: var(--s-4);
+  right: var(--s-4);
+}
+
+.lightbox-prev {
+  left: var(--s-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+
+.lightbox-next {
+  right: var(--s-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+
+@media (max-width: 599px) {
+  .lightbox-prev { left: var(--s-2); }
+  .lightbox-next { right: var(--s-2); }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  :root {
+    --bg: #ffffff;
+    --bg-card: #f5f0e3;
+    --bg-deep: #ebe2cc;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --accent-red: #8a1626;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  .site-header,
+  .scroll-cue,
+  .header-share,
+  .share-btn,
+  .link-btn,
+  .copy-btn,
+  .back-to-top,
+  .toast,
+  .lightbox {
+    display: none !important;
+  }
+
+  .hero {
+    margin-top: 0;
+  }
+
+  .hero-image {
+    aspect-ratio: 16 / 9;
+    page-break-after: avoid;
+  }
+
+  .hero-meta {
+    padding: var(--s-4) 0;
+  }
+
+  .hero-title {
+    font-size: 28pt;
+  }
+
+  .section {
+    padding: var(--s-5) 0;
+    page-break-inside: auto;
+  }
+
+  .section-title,
+  .prayer-title,
+  h3, h4 {
+    page-break-after: avoid;
+  }
+
+  .prayer-card,
+  .big-card,
+  .mini-card,
+  .kg-card,
+  .quote-bubble,
+  .hymn,
+  .timeline li {
+    page-break-inside: avoid;
+  }
+
+  .gallery {
+    gap: 4pt;
+  }
+
+  .gallery figure {
+    aspect-ratio: 1 / 1;
+    box-shadow: none;
+    border: 0.5pt solid #ccc;
+  }
+
+  .photo-frame img {
+    cursor: default;
+  }
+
+  .support-details {
+    page-break-inside: avoid;
+  }
+
+  /* details should auto-open in print */
+  .support-details {
+    border: none;
+  }
+
+  .support-details summary {
+    display: none;
+  }
+
+  .support-body {
+    border-top: none;
+    background: var(--bg-card);
+    padding: var(--s-4);
+  }
+
+  .footer-url {
+    color: #666;
+  }
+
+  /* Show URL after links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #666;
+  }
+
+  a[href^="#"]::after {
+    content: "";
+  }
+}
