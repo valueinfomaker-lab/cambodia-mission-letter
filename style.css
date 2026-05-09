@@ -1350,15 +1350,6 @@ ul, ol {
   text-align: center;
 }
 
-.footer-url {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin: 0;
-  word-break: break-all;
-  opacity: 0.8;
-}
-
 .copyright {
   font-family: var(--font-sans);
   font-size: 0.75rem;
@@ -1624,9 +1615,6 @@ ul, ol {
     padding: var(--s-4);
   }
 
-  .footer-url {
-    color: #666;
-  }
 
   /* Show URL after links */
   a[href^="http"]::after {

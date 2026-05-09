@@ -60,10 +60,6 @@ function hydrateConfig() {
   // Published date
   $$('[data-bind="publishedAt"]').forEach(el => el.textContent = CONFIG.PUBLISHED_AT);
 
-  // Footer URL
-  const urlEl = $("#footerUrl");
-  if (urlEl) urlEl.textContent = siteUrl();
-
   // Update OG meta + canonical with actual URL
   $$('meta[property="og:url"]').forEach(el => el.setAttribute("content", siteUrl()));
   $$('meta[property="og:image"]').forEach(el => el.setAttribute("content", absoluteUrl(CONFIG.OG_IMAGE_PATH)));
