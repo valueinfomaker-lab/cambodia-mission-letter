@@ -26,9 +26,6 @@ const CONFIG = {
     phoneKh: "088-718-4720"
   },
 
-  // 발행일 (예: "2026년 5월 9일")
-  PUBLISHED_AT: "2026년 새해",
-
   // 공유 시 사용할 본문 정보 (Web Share API / OG 메타에서 사용)
   SHARE: {
     title: "MISSION IN CAMBODIA — 남기선 · 임소리 선교사",
@@ -58,9 +55,6 @@ function hydrateConfig() {
   hydrateContact("kakaoId", CONFIG.CONTACT.kakaoId);
   hydrateContact("phoneKr", CONFIG.CONTACT.phoneKr);
   hydrateContact("phoneKh", CONFIG.CONTACT.phoneKh);
-
-  // Published date
-  $$('[data-bind="publishedAt"]').forEach(el => el.textContent = CONFIG.PUBLISHED_AT);
 
   // Update OG meta + canonical with actual URL
   $$('meta[property="og:url"]').forEach(el => el.setAttribute("content", siteUrl()));
@@ -225,7 +219,7 @@ function initReveal() {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) return;
 
-  const targets = $$(".section, .gallery figure, .prayer-card, .big-card, .kg-card, .mini-card, .timeline li");
+  const targets = $$(".section, .gallery figure, .prayer-item, .big-card, .kg-card, .mini-card, .timeline li");
   targets.forEach(el => el.classList.add("reveal"));
 
   if (!("IntersectionObserver" in window)) {

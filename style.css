@@ -931,92 +931,105 @@ ul, ol {
   }
 }
 
-.prayer-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-4);
+.prayer-list {
+  max-width: 720px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  counter-reset: prayer;
 }
 
-@media (min-width: 600px) {
-  .prayer-cards { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 960px) {
-  .prayer-cards { grid-template-columns: repeat(3, 1fr); }
-}
-
-.prayer-card {
+.prayer-item {
   position: relative;
-  padding: var(--s-5) var(--s-5) var(--s-5) var(--s-7);
-  background: var(--bg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  font-size: 0.95rem;
-  line-height: 1.65;
+  padding: var(--s-5) 0 var(--s-5) var(--s-8);
+  border-bottom: 1px solid var(--bg-deep);
+  counter-increment: prayer;
 }
 
-.prayer-card::before {
-  content: "";
+.prayer-item:first-child {
+  border-top: 1px solid var(--bg-deep);
+}
+
+.prayer-item::before {
+  content: counter(prayer) ".";
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--accent-red);
-  border-radius: 4px 0 0 4px;
-}
-
-.prayer-card .check {
-  position: absolute;
   top: var(--s-5);
-  left: var(--s-4);
-  width: 18px;
-  height: 18px;
-  background: var(--bg);
-  border: 2px solid var(--accent-red);
-  border-radius: 4px;
-}
-
-.prayer-card .check::after {
-  content: "";
-  position: absolute;
-  left: 3px;
-  top: -2px;
-  width: 6px;
-  height: 12px;
-  border-right: 2.5px solid var(--accent-red);
-  border-bottom: 2.5px solid var(--accent-red);
-  transform: rotate(45deg);
-}
-
-.prayer-card h3 {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
+  width: var(--s-7);
+  font-family: var(--font-roman);
+  font-size: 1.5rem;
   font-weight: 700;
-  margin: 0 0 var(--s-2) 0;
-  color: var(--text);
-  padding-left: var(--s-5);
+  color: var(--accent-red);
+  line-height: 1.3;
+  text-align: left;
 }
 
-.prayer-card p,
-.prayer-card .church-chips {
+.prayer-item > h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 var(--s-3) 0;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.prayer-item > p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
   margin: 0;
 }
 
-.prayer-card p {
+.prayer-item strong {
+  color: var(--accent-red);
+  font-weight: 700;
+}
+
+.prayer-sublist {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-4) 0 0 0;
+}
+
+.prayer-sublist li {
+  position: relative;
+  padding-left: var(--s-4);
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: var(--text-muted);
 }
 
-.prayer-card strong {
-  color: var(--text);
+.prayer-sublist li + li {
+  margin-top: var(--s-3);
 }
 
+.prayer-sublist li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-red);
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.prayer-sublist strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.prayer-item .church-chips {
+  margin: var(--s-3) 0;
+}
 
 .church-chips {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
-  margin-top: var(--s-2) !important;
+  list-style: none;
+  padding: 0;
+  margin: var(--s-2) 0;
 }
 
 .church-chips li {
@@ -1324,8 +1337,7 @@ ul, ol {
   margin: 0 0 var(--s-2) 0;
 }
 
-.footer-contact,
-.footer-date {
+.footer-contact {
   font-family: var(--font-sans);
   font-size: 0.9rem;
   color: var(--text);
@@ -1335,14 +1347,6 @@ ul, ol {
 .footer-contact .contact-line {
   display: block;
   line-height: 1.7;
-}
-
-.footer-share-note {
-  font-family: var(--font-serif);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin: var(--s-2) 0 0 0;
-  line-height: 1.5;
 }
 
 .footer-bottom {
@@ -1577,7 +1581,7 @@ ul, ol {
     page-break-after: avoid;
   }
 
-  .prayer-card,
+  .prayer-item,
   .big-card,
   .mini-card,
   .kg-card,
